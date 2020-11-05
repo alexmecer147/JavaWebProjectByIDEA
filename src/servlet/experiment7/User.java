@@ -2,10 +2,9 @@ package servlet.experiment7;
 
 import util.DBConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Kanfeer
@@ -21,6 +20,7 @@ public class User {
     private String birthday;
     private int money;
     private int age;
+
 
     public User() {
     }
@@ -125,5 +125,65 @@ public class User {
             p.setSex(rs.getString("sex"));
         }
         return p;
+    }
+
+    public List<User> listAllUser() throws SQLException {
+        Connection conn;
+        conn = DBConnection.getConnection();
+        String sql = "select * from user";
+        Statement st = conn.createStatement();
+        ResultSet rs1 = st.executeQuery(sql);
+        PreparedStatement pst = conn.prepareStatement(sql);
+        List<User> userList = new ArrayList<>();
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()){
+            User p = new User();
+            p.setId(rs.getInt("id"));
+            p.setName(rs.getString("name"));
+            p.setAge(rs.getInt("age"));
+            p.setPassword(rs.getString("password"));
+            p.setBirthday(rs.getString("birthday"));
+            p.setMoney(rs.getInt("money"));
+            p.setSex(rs.getString("sex"));
+            userList.add(p);
+        }
+        return userList;
+    }
+
+    public User getUserById(int id) throws SQLException {
+        Connection conn;
+        conn = DBConnection.getConnection();
+        String sql = "select * from user where id = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1,id);
+        ResultSet rs = pst.executeQuery();
+        User p = new User();
+        while (rs.next()){
+            p.setId(rs.getInt("id"));
+            p.setAge(rs.getInt("age"));
+            p.setBirthday(rs.getString("birthday"));
+            p.setMoney(rs.getInt("money"));
+            p.setName(rs.getString("name"));
+            p.setPassword(rs.getString("password"));
+            p.setSex(rs.getString("sex"));
+        }
+        return p;
+    }
+
+    public int register() throws SQLException {
+        int id = -1;
+        Connection conn;
+        conn = DBConnection.getConnection();
+        String sql = "insert into user (name,password,age) values (?,?,?)";
+        PreparedStatement pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        pst.setString(1,name);
+        pst.setString(2,password);
+        pst.setInt(3,age);
+        pst.executeUpdate();
+        ResultSet rs = pst.getGeneratedKeys();
+        if (rs.next()){
+            id = rs.getInt(1);
+        }
+        return id;
     }
 }

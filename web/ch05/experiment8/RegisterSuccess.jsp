@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Kanfeer
@@ -16,6 +17,6 @@
 %>
 创建用户<%=user.getName()%>成功。
 
-
+<a href="<c:out value="${pageContext.request.contextPath}"/>/ListAllServlet1">显示全部用户信息</a>
 </body>
 </html>

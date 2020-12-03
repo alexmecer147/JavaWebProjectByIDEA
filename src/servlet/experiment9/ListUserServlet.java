@@ -14,22 +14,21 @@ import java.util.List;
 /**
  * @author Kanfeer
  * @package_name ${PACKAGE_NAME}
- * @date 2020/11/12 - 8:18
+ * @date 2020/11/28 - 17:14
  * @project_name NewProjectByIDEA
  */
-@WebServlet(name = "ListUsersServlet" ,urlPatterns = {"/ListUsersServlet","/lst"})
-public class ListUsersServlet extends HttpServlet {
+@WebServlet(name = "ListUserServlet" ,urlPatterns = {"/ListUserServlet"})
+public class ListUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       // String name = request.getParameter("name");
         try {
-            List<User> users = new User().listAllUser();
-            request.setAttribute("users",users);
-            //System.out.println(users.size()+"大小");
-            request.getRequestDispatcher("/ch07/experiment9/listUsers.jsp").forward(request,response);
+            List<User> lists = new User().getUserByName2(request.getParameter("name"));
+            request.setAttribute("lists",lists);
+            request.getRequestDispatcher("/ch07/experiment9/findUsers.jsp").forward(request,response);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

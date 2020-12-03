@@ -28,7 +28,7 @@ public class ReceiveServlet extends HttpServlet {
             User receiveUser = (User) request.getAttribute("requestUser");
             out.print(receiveUser.getName() + receiveUser.getPassword());
         }else {
-            out.print("因为是重定向，原request中的信息已经丢失，所以User对象为空++++null");
+            out.print("鍥犱负鏄噸瀹氬悜锛屾墍浠equest涓虹┖User涓簄ull");
         }
         out.println("</body></html>");
     }

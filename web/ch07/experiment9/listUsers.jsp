@@ -14,13 +14,12 @@
     <title>LISTALLUSERS</title>
 </head>
 <body>
-<jsp:useBean id="user" class="servlet.experiment7.User" scope="session"/>
-<%
-List<User> users1 = (List<User>) request.getAttribute("users");
-    Collection<User> users  = (Collection<User>) request.getAttribute("users");
-%>
 <c:forEach var="user" items="${users}">
-    id=${user.id}---name=${user.name}---password=${user.password}<br>
+    id=<c:out value="${user.id}"/>---name=<c:out value="${user.name}"/>---password=<c:out value="${user.password}"/><br>
 </c:forEach>
+<form action="ListUserServlet" method="post">
+    你要查找的姓名:<input type="text" name="name"><br>
+    <input type="submit" value="查找">
+</form>
 </body>
 </html>

@@ -31,7 +31,7 @@ public class ApplicationScopeServlet extends HttpServlet {
         requestApplicationUser.setAge(10);
         requestApplicationUser.setName("Kanfeer Application");
         requestApplicationUser.setPassword("123456");
-        requestApplicationUser.setSex("ÄÐ");
+        requestApplicationUser.setSex("å¥³");
         requestApplicationUser.setBirthday("2001-8-9");
         ServletContext application = this.getServletContext();
         application.setAttribute("requestApplicationUser",requestApplicationUser);

@@ -110,7 +110,7 @@ public class User {
     public User getUserByName(String name) throws SQLException {
         Connection conn;
         conn = DBConnection.getConnection();
-        String sql = "select * from user where name = ?";
+        String sql = "select * from user where name like ?";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setString(1,name);
         ResultSet rs = pst.executeQuery();
@@ -127,12 +127,34 @@ public class User {
         return p;
     }
 
+    public List<User> getUserByName2(String name) throws SQLException {
+        Connection conn;
+        conn = DBConnection.getConnection();
+        String sql = "select * from user where name like ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1,"%"+name+"%");
+        ResultSet rs = pst.executeQuery();
+        List<User> list = new ArrayList<>();
+        while (rs.next()){
+            User p = new User();
+            p.setId(rs.getInt("id"));
+            p.setAge(rs.getInt("age"));
+            p.setBirthday(rs.getString("birthday"));
+            p.setMoney(rs.getInt("money"));
+            p.setName(rs.getString("name"));
+            p.setPassword(rs.getString("password"));
+            p.setSex(rs.getString("sex"));
+            list.add(p);
+        }
+        return list;
+    }
+
     public List<User> listAllUser() throws SQLException {
         Connection conn;
         conn = DBConnection.getConnection();
         String sql = "select * from user";
-        Statement st = conn.createStatement();
-        ResultSet rs1 = st.executeQuery(sql);
+       // Statement st = conn.createStatement();
+        //ResultSet rs1 = st.executeQuery(sql);
         PreparedStatement pst = conn.prepareStatement(sql);
         List<User> userList = new ArrayList<>();
         ResultSet rs = pst.executeQuery();

@@ -31,7 +31,7 @@ public class SessionScopeServlet extends HttpServlet {
         requestSessionUser.setAge(10);
         requestSessionUser.setName("Kanfeer Session");
         requestSessionUser.setPassword("123456");
-        requestSessionUser.setSex("ÄÐ");
+        requestSessionUser.setSex("å¥³");
         requestSessionUser.setBirthday("2001-8-9");
         HttpSession session = request.getSession();
         session.setAttribute("requestSessionUser",requestSessionUser);

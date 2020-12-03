@@ -2,7 +2,6 @@ package servlet.experiment5;
 
 import ch06.User;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "RequestScopeServlet",urlPatterns = "/RequestScopeServlet")
 
 public class RequestScopeServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
         out.println("<html><head><title>Experiment5 Servlet</title></head><body>");
@@ -28,16 +27,16 @@ public class RequestScopeServlet extends HttpServlet {
 
         User requestUser = new User();
         requestUser.setAge(10);
-        requestUser.setName("Kanfeer");
+        requestUser.setName("Kanfeer1121");
         requestUser.setPassword("123456");
-        requestUser.setSex("ÄÐ");
-        requestUser.setBirthday("2001-8-9");
+        requestUser.setSex("ç”·");
+        requestUser.setBirthday("2020-8-9");
         request.setAttribute("requestUser",requestUser);
         //request.getRequestDispatcher("ReceiveServlet").forward(request,response);
-        //response.sendRedirect("ReceiveServlet");
+        response.sendRedirect("ReceiveServlet");
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doPost(request,response);
         //response
     }

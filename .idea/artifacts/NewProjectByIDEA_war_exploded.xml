@@ -7,6 +7,12 @@
         <element id="directory" name="classes">
           <element id="module-output" name="NewProjectByIDEA" />
         </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/jstl.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/standard.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/mysql-connector-java-5.1.49-bin.jar" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.14-bin" />
+        </element>
       </element>
     </root>
   </artifact>
